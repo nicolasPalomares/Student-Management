@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	<head>
+		<meta charset="UTF-8">
+		<title> [[#{updateAssignment.title}]] </title>
+	</head>
+	<body>
+		<header th:replace="~{layout/layout :: header}"></header>
+		<br/>
+		
+		
+		<form id="assignmentForm" th:action="@{/saveAssignment}" method="post" th:object="${assignment}">
+			<!-- if idAssignment == null then insert assignment, else update assignment -->
+			<input type="hidden" name="idAssignment" th:field="*{idAssignment}" />
+			
+			<label for="student"> [[#{assignment.student-name}]] </label>
+			<select th:field="*{student}" name="studentsDropdown" id="studentsDropdown">
+			<option value=""> [[#{actions.insert-assignment.studentsDropdown}]] </option>
+				<option th:each="student : ${students}" th:value="${student.idStudent}" th:text="${student.name} + ' ' + ${student.surname}"></option>
+			</select>
+			<span th:if="${#fields.hasErrors('student')}" th:errors="*{student}">Student Error</span>
+			<br/><br/>
+			
+			<label for="course"> [[#{assignment.course}]] </label>
+			<select th:field="*{course}" name="coursesDropdown" id="coursesDropdown">
+			<option value=""> [[#{actions.insert-assignment.coursesDropdown}]] </option>
+				<option th:each="course : ${courses}" th:value="${course.idCourse}" th:text="${course.name}"></option>
+			</select>
+			<span th:if="${#fields.hasErrors('course')}" th:errors="*{course}">Course Error</span>
+			<br/><br/>
+			
+			<label for="shift"> [[#{assignment.shift}]] </label>
+			<select th:field="*{shift}">
+				<option value=""> [[#{actions.insert-assignment.shiftDropdown}]] </option>
+				<option th:value="'Morning'" th:text="Morning"></option>
+				<option th:value="'Afternoon'" th:text="Afternoon"></option>
+				<option th:value="'Night'" th:text="Night"></option>
+			</select>
+			<span th:if="${#fields.hasErrors('shift')}" th:errors="*{shift}">Shift Error</span>
+			<br/><br/><br/>
+			
+			<input type="submit" name="save" th:value="#{actions.update.save}" />
+		</form>
+		<br/>
+		
+		<footer th:replace="~{layout/layout :: footer}"></footer>
+	</body>
+</html>

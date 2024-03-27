@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	<head>
+		<meta charset="UTF-8">
+		<title> [[#{index.title}]] </title>
+	</head>
+	<body>
+		<header th:replace="~{layout/layout :: header}"></header>
+		<br/>
+		<a th:href="@{/listStudentsRedirect}"> [[#{index.students}]] </a> |
+		<a th:href="@{/listAssignmentsRedirect}"> [[#{index.assignments}]] </a> |
+		<a th:href="@{/listCoursesRedirect}"> [[#{index.courses}]] </a>
+		<br/>
+		<br/>
+		<footer th:replace="~{layout/layout :: footer}"></footer>
+	</body>
+</html>

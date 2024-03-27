@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	<head>
+		<meta charset="UTF-8">
+		<title> [[#{updateStudent.title}]] </title>
+	</head>
+	<body>
+		<header th:replace="~{layout/layout :: header}"></header>
+		<br/>
+		
+		
+		<form th:action="@{/saveStudent}" method="post" th:object="${student}">
+			<!-- if idStudent == null then insert student, else update student -->
+			<input type="hidden" name="idStudent" th:field="*{idStudent}" />
+			
+			<label for="name"> [[#{student.name}]] </label>
+			<input type="text" name="name" th:field="*{name}" />
+			<span th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</span>
+			<br/><br/>
+			
+			<label for="surname"> [[#{student.surname}]] </label>
+			<input type="text" name="surname" th:field="*{surname}" />
+			<span th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}">Surname Error</span>
+			<br/><br/><br/>
+			
+			<!-- Address Form: -->
+			[[#{actions.insert-student.address}]]:
+			<input type="hidden" name="address.idAddress" th:field="*{address.idAddress}" />
+			<br/><br/>
+			
+			<label for="street"> [[#{student.address.street}]] </label>
+			<input type="text" name="address.street" th:field="*{address.street}" />
+			<span th:if="${#fields.hasErrors('address.street')}" th:errors="*{address.street}">Street Error</span>
+			<br/><br/>
+			
+			<label for="streetNo"> [[#{student.address.streetNo}]] </label>
+			<input type="text" name="address.streetNo" th:field="*{address.streetNo}" />
+			<span th:if="${#fields.hasErrors('address.streetNo')}" th:errors="*{address.streetNo}">StreetNo Error</span>
+			<br/><br/>
+			
+			<label for="country"> [[#{student.address.country}]] </label>
+			<input type="text" name="address.country" th:field="*{address.country}" />
+			<span th:if="${#fields.hasErrors('address.country')}" th:errors="*{address.country}">Country Error</span>
+			<br/><br/><br/>
+			
+			<!-- Contact Form: -->
+			[[#{actions.insert-student.contact}]]:
+			<input type="hidden" name="contact.idContact" th:field="*{contact.idContact}" />
+			<br/><br/>
+			
+			<label for="phoneNumber"> [[#{student.contact.phoneNumber}]] </label>
+			<input type="tel" name="contact.phoneNumber" th:field="*{contact.phoneNumber}" />
+			<span th:if="${#fields.hasErrors('contact.phoneNumber')}" th:errors="*{contact.phoneNumber}">Phone Number Error</span>
+			<br/><br/>
+			
+			<label for="email"> [[#{student.contact.email}]] </label>
+			<input type="text" name="contact.email" th:field="*{contact.email}" />
+			<span th:if="${#fields.hasErrors('contact.email')}" th:errors="*{contact.email}">E-Mail Error</span>
+			<br/><br/>
+			
+			<input type="submit" name="save" th:value="#{actions.update.save}" />
+		</form>
+		<br/>
+		
+		
+		<footer th:replace="~{layout/layout :: footer}"></footer>
+	</body>
+</html>

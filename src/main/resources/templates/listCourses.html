@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	<head>
+		<meta charset="UTF-8">
+		<title> [[#{index.title}]] </title>
+	</head>
+	<body>
+		<header th:replace="~{layout/layout :: header}"></header>
+		<br/>
+		<a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/insertCourse}"> [[#{actions.insert-course}]] </a>
+		<br/><br/>
+		<div th:if="${courses != null and !courses.empty}">
+			<table border="1">
+				<tr>
+					<th> [[#{course.name}]] </th>
+					<th> [[#{course.price}]] </th>
+				</tr>
+				<tr th:each="course : ${courses}">
+					<td th:text="${course.name}" />
+					<td th:text="'$' + ${course.price}" />
+					<td sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/editCourse/} + ${course.idCourse}"> [[#{actions.edit}]] </a></td>
+					<td sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/deleteCourse(idCourse=${course.idCourse})}"> [[#{actions.delete}]] </a></td>
+				</tr>
+			</table>
+		</div>
+		<div th:if="${courses == null or courses.empty}">
+			[[#{actions.emptyList}]]
+		</div>
+		<br/>
+		<footer th:replace="~{layout/layout :: footer}"></footer>
+	</body>
+</html>

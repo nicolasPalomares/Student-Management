@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title> [[#{accessDenied.title}]] </title>
+	</head>
+	<body>
+		<div>
+			[[#{accessDenied.text}]]
+			<a th:href="@{/}"> [[#{general.homepage}]] </a>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	<head>
+		<meta charset="UTF-8">
+		<title> [[#{index.title}]] </title>
+	</head>
+	<body>
+		<header th:replace="~{layout/layout :: header}"></header>
+		<br/>
+		<a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/insertStudent}"> [[#{actions.insert-student}]] </a>
+		<br/><br/>
+		<div th:if="${students != null and !students.empty}">
+			<table border="1">
+				<tr>
+					<th> [[#{student.name}]] </th>
+					<th> [[#{student.address}]] </th>
+					<th> [[#{student.phoneNumber}]] </th>
+					<th> [[#{student.email}]] </th>
+				</tr>
+				<tr th:each="student : ${students}">
+					<td th:text="${student.surname} + ', ' + ${student.name}" />
+					<td th:text="${student.address.street} + ' ' + ${student.address.streetNo} + ', ' + ${student.address.country}" />
+					<td th:text="${student.contact.phoneNumber}" />
+					<td th:text="${student.contact.email}" />
+					<td sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/editStudent/} + ${student.idStudent}"> [[#{actions.edit}]] </a></td>
+					<td sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/deleteStudent(idStudent=${student.idStudent})}"> [[#{actions.delete}]] </a></td>
+				</tr>
+			</table>
+		</div>
+		<div th:if="${students == null or students.empty}">
+			[[#{actions.emptyList}]]
+		</div>
+		<br/>
+		<footer th:replace="~{layout/layout :: footer}"></footer>
+	</body>
+</html>

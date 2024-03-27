@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+	<head>
+		<meta charset="UTF-8">
+		<title> [[#{updateCourse.title}]] </title>
+	</head>
+	<body>
+		<header th:replace="~{layout/layout :: header}"></header>
+		<br/>
+		
+		
+		<form th:action="@{/saveCourse}" method="post" th:object="${course}">
+			<!-- if idCourse == null then insert course, else update course -->
+			<input type="hidden" name="idCourse" th:field="*{idCourse}" />
+			
+			<label for="name"> [[#{course.name}]] </label>
+			<input type="text" name="name" th:field="*{name}" />
+			<span th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name Error</span>
+			<br/><br/>
+			
+			<label for="price"> [[#{course.price}]] </label>
+			<input type="number" name="price" th:field="*{price}" />
+			<span th:if="${#fields.hasErrors('price')}" th:errors="*{price}">Price Error</span>
+			<br/><br/><br/>
+			
+			<input type="submit" name="save" th:value="#{actions.update.save}" />
+		</form>
+		<br/>
+		
+		
+		<footer th:replace="~{layout/layout :: footer}"></footer>
+	</body>
+</html>
