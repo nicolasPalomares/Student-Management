@@ -19,4 +19,4 @@ Users can only use the application to:
 For more information about the features, architecture of the program, javadoc, etc. please refer to the full documentation.
 
 
---This application was made with JDK version 21--
+-JDK 21-
