@@ -1,4 +1,4 @@
-#Java Spring Web Application for Educational Institution Management
+## Java Spring Web Application for Educational Institution Management
 
 PRECONDITION: If the user wants to execute the program, it is necessary to configure the database first. For this, I exported an SQL file
 with all the tables and data originally created from my PostgreSQL software. That file is located inside "psql_database_backup" folder inside the project directory.
