@@ -22,4 +22,4 @@ This Java Spring web application is designed to streamline the management of var
 
 For more detailed information on features, architecture, Javadoc, and more, please refer to the full documentation.
 
--JDK 21-
+- JDK 21
